@@ -1,0 +1,437 @@
+
+Exercise 1 
+// Node class represents a single node in the linked list
+class Node {
+    Student data; // Student object
+    Node next; // Reference to the next node
+
+    public Node(Student student) {
+        data = student;
+        next = null;
+    }
+}
+
+// Student class represents a student object
+class Student {
+    String name;
+    int id;
+    int grade;
+
+    public Student(String name, int id, int grade) {
+        this.name = name;
+        this.id = id;
+        this.grade = grade;
+    }
+}
+
+// LinkedList class represents the linked list data structure
+class LinkedList {
+    Node head; // Reference to the first node in the linked list
+
+    // Method to add a student to the linked list
+    public void addStudent(Student student) {
+        Node newNode = new Node(student);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+    }
+
+    // Method to display the student information in the linked list (forward order)
+    public void displayStudents() {
+        Node current = head;
+        while (current != null) {
+            Student student = current.data;
+            System.out.println("Name: " + student.name);
+            System.out.println("ID: " + student.id);
+            System.out.println("Grade: " + student.grade);
+            System.out.println("----------------------");
+            current = current.next;
+        }
+    }
+
+    // Method to display the student information in the linked list (backward order)
+    public void displayStudentsBackward() {
+        displayStudentsBackwardUtil(head);
+    }
+
+    private void displayStudentsBackwardUtil(Node node) {
+        if (node == null) {
+            return;
+        }
+
+        displayStudentsBackwardUtil(node.next);
+
+        Student student = node.data;
+        System.out.println("Name: " + student.name);
+        System.out.println("ID: " + student.id);
+        System.out.println("Grade: " + student.grade);
+        System.out.println("----------------------");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create a linked list
+        LinkedList studentList = new LinkedList();
+
+        // Create student objects
+        Student student1 = new Student("gill", 83845, 80);
+        Student student2 = new Student("Brar", 68880, 97);
+        Student student3 = new Student("dhillon", 54321, 89);
+
+        // Add students to the linked list
+        studentList.addStudent(student1);
+        studentList.addStudent(student2);
+        studentList.addStudent(student3);
+
+        // Display student information (forward order)
+        System.out.println("Forward Order:");
+        studentList.displayStudents();
+
+        // Display student information (backward order)
+        System.out.println("Backward Order:");
+        studentList.displayStudentsBackward();
+    }
+}
+Exercise 2
+import java.util.Stack;
+
+class Book {
+    String title;
+    String author;
+    String isbn;
+
+    public Book(String title, String author, String isbn) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+    }
+
+    // Getter methods for the properties (not necessary for the assignment, but useful)
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+}
+
+class BookStack {
+    private Stack<Book> stack;
+
+    public BookStack() {
+        stack = new Stack<>();
+    }
+
+    public void push(Book book) {
+        stack.push(book);
+    }
+
+    public Book pop() {
+        return stack.pop();
+    }
+
+    public boolean isEmpty() {
+        return stack.isEmpty();
+    }
+
+    public int size() {
+        return stack.size();
+    }
+
+    public Book peek() {
+        return stack.peek();
+    }
+
+    // Method to walk over the stack and report on the titles of each book
+    public void reportTitles() {
+        System.out.println("Books in the stack:");
+        for (Book book : stack) {
+            System.out.println(book.getTitle());
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        BookStack bookStack = new BookStack();
+
+        // Pushing 10 books to the stack
+        bookStack.push(new Book("book", "author", "isbn"));
+* 		To Kill a Mockingbird" by Harper Lee
+* 		"1984" by George Orwell
+* 		"The Great Gatsby" by F. Scott Fitzgerald
+* 		"Pride and Prejudice" by Jane Austen
+* 		"The Lord of the Rings" by J.R.R. Tolkien
+* 		"Harry Potter and the Sorcerer's Stone" by J.K. Rowling
+* 		"The Catcher in the Rye" by J.D. Salinger
+* 		"The Hobbit" by J.R.R. Tolkien
+* 		"The Chronicles of Narnia: The Lion, the Witch and the Wardrobe" by C.S. Lewis
+* 		"To Kill a Kingdom" by Alexandra Christo
+    
+       
+
+        // Report on the titles of each book in the stack
+        bookStack.reportTitles();
+        System.out.println("Stack size: " + bookStack.size());
+
+
+
+        // Popping a book from the stack
+
+        Book poppedBook = bookStack.pop();
+
+        System.out.println("Popped book: " + poppedBook.title);
+
+        System.out.println("Stack size: " + bookStack.size());
+
+        // Checking if the stack is empty
+
+        System.out.println("Is stack empty? " + bookStack.isEmpty());
+
+
+
+        // Peeking at the top book
+
+        Book topBook = bookStack.peek();
+
+        System.out.println("Top book: " + topBook.title);
+
+        System.out.println("Is stack empty? " + bookStack.isEmpty());
+
+        System.out.println("Stack size: " + bookStack.size());
+
+        System.out.println("Popped book: " + poppedBook.title);
+
+
+
+
+
+    }
+}
+Exercise 3
+import java.util.Queue;
+import java.util.LinkedList;
+
+class Athlete {
+    String name;
+    int age;
+    int runningDistanceEachDay;
+
+    public Athlete(String name, int age, int runningDistanceEachDay) {
+        this.name = name;
+        this.age = age;
+        this.runningDistanceEachDay = runningDistanceEachDay;
+    }
+}
+
+class QueueManager {
+    private Queue<Athlete> queue;
+
+    public QueueManager() {
+        queue = new LinkedList<>();
+    }
+
+    public void enqueue(Athlete athlete) {
+        queue.add(athlete);
+    }
+
+    public Athlete dequeue() {
+        return queue.poll();
+    }
+
+    public boolean isEmpty() {
+        return queue.isEmpty();
+    }
+
+    public int size() {
+        return queue.size();
+    }
+
+    public Athlete peek() {
+        return queue.peek();
+    }
+
+    public void printQueueDetails() {
+        for (Athlete athlete : queue) {
+            System.out.println("Name: " + athlete.name);
+            System.out.println("Age: " + athlete.age);
+            System.out.println("Running Distance Each Day: " + athlete.runningDistanceEachDay);
+            System.out.println("-----------------------");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        QueueManager athleteQueue = new QueueManager();
+
+        // Create 10 Athletes and enqueue them
+        Athlete athlete1 = new Athlete("Mark", 20, 9);
+* 		LeBron James
+* 		Serena Williams
+* 		Cristiano Ronaldo
+* 		Lionel Messi
+* 		Simone Biles
+* 		Usain Bolt
+* 		Roger Federer
+* 		Michael Phelps
+* 		Alex Morgan
+* 		Tom Brady
+
+        athleteQueue.enqueue(athlete1);
+        athleteQueue.enqueue(athlete2);
+        athleteQueue.enqueue(athlete3);
+        athleteQueue.enqueue(athlete4);
+        athleteQueue.enqueue(athlete5);
+        athleteQueue.enqueue(athlete6);
+        athleteQueue.enqueue(athlete7);
+        athleteQueue.enqueue(athlete8);
+        athleteQueue.enqueue(athlete9);
+        athleteQueue.enqueue(athlete10);
+        athleteQueue.enqueue(athlete1);
+
+        // Iterate over the queue and print out the details of each Athlete
+        athleteQueue.printQueueDetails();
+
+        // Verify if the queue still contains the same Athletes
+        System.out.println("Is queue empty? " + athleteQueue.isEmpty());
+
+        System.out.println("Queue size: " + athleteQueue.size());
+
+        Athlete frontAthlete = athleteQueue.peek();
+
+        System.out.println("Front athlete: " + frontAthlete.name);
+        Athlete dequeuedAthlete2 = athleteQueue.dequeue();
+
+        System.out.println("Dequeued athlete: " + dequeuedAthlete2.name);
+    }
+}
+Exercise 4
+import java.util.LinkedList;
+
+class Student {
+    String name;
+    float grade;
+
+    public Student(String name, float grade) {
+        this.name = name;
+        this.grade = grade;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public float getGrade() {
+        return grade;
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+        LinkedList<Student> studentList = new LinkedList<>();
+
+        // Create three student objects
+        Student student1 = new Student("Jasveer", 85.7f);
+        Student student2 = new Student("Danny", 97.9f);
+        Student student3 = new Student("Ali", 73.4f);
+
+        // Add the students to the linked list
+        studentList.add(student1);
+        studentList.add(student2);
+        studentList.add(student3);
+
+        // Print all students
+        System.out.println("All students:");
+        printStudents(studentList);
+
+        float gradeThreshold = 80.0f;
+        LinkedList<Student> studentsAboveThreshold = retrieveStudents(studentList, gradeThreshold);
+
+        System.out.println("\nStudents with grades above " + gradeThreshold + ":");
+        for (Student student : studentsAboveThreshold) {
+            System.out.println("Name: " + student.getName() + ", Grade: " + student.getGrade());
+        }
+    }
+
+    public static void printStudents(LinkedList<Student> studentList) {
+        for (Student student : studentList) {
+            System.out.println("Name: " + student.getName() + ", Grade: " + student.getGrade());
+        }
+    }
+
+    public static LinkedList<Student> retrieveStudents(LinkedList<Student> studentList, float gradeThreshold) {
+        LinkedList<Student> studentsAboveThreshold = new LinkedList<>();
+
+        for (Student student : studentList) {
+            if (student.getGrade() > gradeThreshold) {
+                studentsAboveThreshold.add(student);
+            }
+        }
+
+        return studentsAboveThreshold;
+    }
+}
+Exercise 5
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+public class RoundRobinScheduler {
+    private Stack<String> scheduleStack;
+    private Queue<String> datingQueue;
+
+    public RoundRobinScheduler() {
+        scheduleStack = new Stack<>();
+        datingQueue = new LinkedList<>();
+    }
+
+    public void addLadyFriend(String ladyFriend) {
+        datingQueue.add(ladyFriend);
+    }
+
+    public void generateSchedule() {
+        int numLadyFriends = datingQueue.size();
+        int numDays = numLadyFriends * 2;  // Each lady friend gets two dates
+
+        for (int day = 1; day <= numDays; day++) {
+            String currentLadyFriend = datingQueue.poll();
+            scheduleStack.push(currentLadyFriend);
+
+            if (day % numLadyFriends == 0) {
+                while (!scheduleStack.isEmpty()) {
+                    String scheduledLadyFriend = scheduleStack.pop();
+                    System.out.println("Day " + day + ": Josh is dating " + scheduledLadyFriend);
+                    datingQueue.add(scheduledLadyFriend);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        RoundRobinScheduler scheduler = new RoundRobinScheduler();
+
+        // Add lady friends to the scheduler
+        scheduler.addLadyFriend("Ash");
+        scheduler.addLadyFriend("Chrisler");
+        scheduler.addLadyFriend("Kitty");
+        scheduler.addLadyFriend("Katty");
+       
+
+        // Generate and print the schedule
+        scheduler.generateSchedule();
+    }
+}
